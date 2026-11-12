@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bee Sweet Admin</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2b6b21">
+<link rel="manifest" href="admin.webmanifest">
+<link rel="icon" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bee Sweet">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--green:#4aa52f;--deep:#2b6b21;--bg:#f5f7f2;--surface:#fff;--ink:#17261a;--muted:#667565;--line:#e1e8dc;--accent:#e8762b;--red:#d32f2f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a12;--surface:#1a271b;--ink:#eef4ea;--muted:#9fb09b;--line:#2b3d2c}}
+:root[data-theme="dark"]{--bg:#111a12;--surface:#1a271b;--ink:#eef4ea;--muted:#9fb09b;--line:#2b3d2c}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--green);z-index:20}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--green);color:#fff}
+.top{display:flex;align-items:center;gap:10px;padding:10px 14px}.top img{height:42px}.top b{font-size:18px;flex:1}
+.out{background:rgba(255,255,255,.18);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px}
+.tabs{display:flex;gap:4px;overflow-x:auto;padding:0 10px;background:var(--deep)}
+.tabs button{background:none;color:#fff;opacity:.75;padding:12px 14px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent}
+.tabs button[aria-current=page]{opacity:1;border-color:#fff}
+main{max-width:980px;margin:0 auto;padding:18px 14px 50px}
+h2{margin:0 0 12px;font-size:20px}h3{margin:0 0 8px;font-size:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.muted{color:var(--muted);font-size:13px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.btn{padding:10px 14px;border-radius:8px;background:var(--deep);color:#fff;font-weight:600}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}.btn.red{background:var(--red)}.btn.sm{padding:7px 11px;font-size:13px}
+.btn:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.seg button{padding:9px 14px;background:var(--surface);font-weight:600}.seg button[aria-pressed=true]{background:var(--deep);color:#fff}
+.in{width:100%;height:42px;border:1px solid var(--line);border-radius:8px;padding:0 12px;background:var(--bg);color:var(--ink)}
+textarea.in{height:80px;padding:10px 12px}
+label.f{display:block;font-weight:600;font-size:13px;margin:10px 0 4px}
+.tag{padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap}
+.g-Pending,.g-New{background:#ececec;color:#444}.g-Processing,.g-Contacted{background:#fff1cf;color:#7a5600}.g-Delivered,.g-Verified,.g-Booked,.g-Live{background:#dcf1d4;color:#1f5f15}.g-Declined,.g-Off{background:#fde0e0;color:#8a1c1c}
+.grid{display:grid;gap:12px}@media(min-width:720px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:repeat(3,1fr)}}
+.stat b{display:block;font-size:22px}.line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.line:last-child{border:0}
+.pr{display:grid;grid-template-columns:56px 1fr;gap:12px}.thumb{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#e6efe0,#d3e3cb);display:grid;place-items:center;font-size:10px;color:#7b9473;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover}
+.f3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.slot{display:grid;gap:8px}.prev{aspect-ratio:16/7;border-radius:8px;background:var(--bg);border:1.5px dashed var(--line);display:grid;place-items:center;color:var(--muted);overflow:hidden;font-size:13px}.prev img,.prev video{width:100%;height:100%;object-fit:cover}
+.was{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;color:var(--muted);margin-right:6px}
+.login{max-width:380px;margin:12vh auto 0;padding:0 14px}.login .logo{background:var(--green);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px}.login img{height:56px}.login span{color:#fff;font-weight:700;font-size:22px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:8px;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s;font-weight:600;font-size:14px;max-width:90vw;text-align:center}.toast.on{opacity:1}
+svg.ch{width:100%;height:auto;display:block}.leg{display:flex;align-items:center;gap:8px;font-size:13px;margin:3px 0}.leg i{width:10px;height:10px;border-radius:3px;flex:none}
+a.tag{text-decoration:none}
+
+.bell{position:relative;width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;padding:0;line-height:0;flex:none}
+.bell svg{display:block;width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform-origin:50% 10%}
+.bell .n{position:absolute;top:-6px;right:-6px;min-width:21px;height:21px;border-radius:11px;background:#e53935;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid var(--green);line-height:1}
+.bell.ring svg{animation:ring .5s ease 4}
+@keyframes ring{0%,100%{transform:rotate(0)}25%{transform:rotate(16deg)}75%{transform:rotate(-16deg)}}
+@media(prefers-reduced-motion:reduce){.bell.ring svg{animation:none}}
+.tog{padding:10px 8px;border-radius:8px;font-weight:700;background:#fde0e0;color:#8a1c1c;width:100%}.tog.on{background:#dcf1d4;color:#1f5f15}
+.pcard{border-top:1px solid var(--line);padding:12px 0;margin-top:12px}
+.vchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.vchip{padding:6px 12px;border-radius:16px;background:#fde0e0;color:#8a1c1c;font-weight:600;font-size:13px}.vchip.on{background:#dcf1d4;color:#1f5f15}
+.prev{margin:0 -14px;border-radius:0;border-left:0;border-right:0}.prev img,.prev video{display:block;width:100%;height:auto;aspect-ratio:16/7;object-fit:cover}
+.cbar{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;margin-bottom:6px;-webkit-overflow-scrolling:touch}.cbtn{white-space:nowrap;padding:10px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-weight:600;flex:none}.cbtn[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
+.bell.spin svg{animation:sp .7s linear infinite;transform-origin:50% 50%}@keyframes sp{to{transform:rotate(360deg)}}
+</style></head>
+<body>
+<div id="app"></div><div class="toast" id="toast"></div>
+<script src="config.js"></script>
+<script>
+const LOGO="icons/logo.png";
+const $=s=>document.querySelector(s),money=n=>'₦'+Number(n).toLocaleString(),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CATS=['Premium Parfait','Shawarma','Juice','Greek Yogurt','Drinking Yogurt','Pastries','Banana Bread','Meat Specials','Extras'];
+const STATUS=['New','Contacted','Booked','Declined'];
+let admin=null,tab='orders',otab='in',ftab='over',nid=100;
+const S={contact:{call:'+234 000 000 0000',wa:'+234 000 000 0000',email:'hello@example.com'},fee:1500,acct:{bank:'Bank name',name:'Account name',no:'0123456789'},social:{tiktok:{url:'',live:false},instagram:{url:'',live:false}},disc:{pct:20,live:false},banner:{slots:[null,null,null],live:false}};
+let products=[],orders=[],bookings=[],MONTHS=[];
+const tot=o=>o.items.reduce((t,i)=>t+i.q*i.p,0)+o.fee;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2200)}
+function checkMedia(f){const x=f.name.split('.').pop().toLowerCase();if(['mp4','mov'].includes(x))return f.size<=20*1048576?'video':'Video must be under 20 MB';return ['png','jpg','jpeg','webp','heic','heif','gif'].includes(x)||f.type.startsWith('image/')?'image':'Unsupported file type'}
+const TABS=[['orders','Orders'],['products','Products'],['banner','Banner'],['discount','Discounts'],['bookings','Booking requests'],['finance','Finance'],['settings','Settings']];
+function render(){
+if(!admin){$('#app').innerHTML=`<div class="login"><div class="logo"><img src="${LOGO}" alt="Logo"><span>Bee Sweet</span></div><div class="card"><h2>Admin login</h2>
+<label class="f" for="em">Email</label><input class="in" id="em" type="email" autocomplete="email"><label class="f" for="pw">Password</label><input class="in" id="pw" type="password" autocomplete="current-password">
+<div style="height:12px"></div><button class="btn" style="width:100%" id="login">Log in</button><p class="muted">Prototype: any valid email and a password of 6 or more characters works. The real login will be checked on the server.</p></div></div>`;return}
+$('#app').innerHTML=`<header><div class="top"><img src="${LOGO}" alt="Logo"><b>Admin</b>${standalone?`<button class="bell" id="rf" aria-label="Refresh"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v5h-5"/></svg></button>`:''}<button class="bell" id="bell" aria-label="Incoming orders"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>${orders.filter(o=>o.st==='Pending').length?`<span class="n">${orders.filter(o=>o.st==='Pending').length}</span>`:''}</button><button class="out" id="logout">Log out</button></div><nav class="tabs">${TABS.map(t=>`<button data-tab="${t[0]}" ${tab===t[0]?'aria-current="page"':''}>${t[1]}</button>`).join('')}</nav></header><main>${VIEWS[tab]()}</main>`}
+const VIEWS={
+orders(){const inc=orders.filter(o=>o.st!=='Delivered'),del=orders.filter(o=>o.st==='Delivered'),L=otab==='in'?inc:del;
+return `${alertCard()}<h2>Orders</h2><div class="seg"><button data-otab="in" aria-pressed="${otab==='in'}">Incoming / Processing (${inc.length})</button><button data-otab="del" aria-pressed="${otab==='del'}">Delivered (${del.length})</button></div>
+${L.map(o=>`<div class="card"><div class="row"><b>Order #${o.id}</b><span><span class="tag g-${o.st}">${o.st==='Pending'?'Incoming':o.st}</span> <span class="tag g-${o.pay}">Payment ${o.pay.toLowerCase()}</span></span></div>
+<div class="muted">${esc(o.cust)} · ${o.phone} · ${o.date}</div>${o.items.map(i=>`<div class="line"><span>${i.q} × ${esc(i.n)}</span><span>${money(i.q*i.p)}</span></div>`).join('')}
+<div class="line"><span>${o.ship}${o.addr?': '+esc(o.addr):''}</span><span>${o.fee?money(o.fee):'No fee'}</span></div><div class="line"><b>Total</b><b>${money(tot(o))}</b></div>
+${o.st==='Pending'?`<div style="height:8px"></div><button class="btn" data-ost="${o.id}|Processing">Start processing</button>`:o.st==='Processing'?`<div style="height:8px"></div><button class="btn" data-ost="${o.id}|Delivered">Mark as delivered</button>`:''}</div>`).join('')||'<div class="card muted">No orders here.</div>'}`},
+products(){const list=products.filter(p=>p.c===pcat);return `<h2>Products</h2><div class="cbar">${CATS.map(c=>`<button class="cbtn" data-pcat="${c}" aria-pressed="${c===pcat}">${c} (${products.filter(p=>p.c===c).length})</button>`).join('')}</div>
+<div class="card"><div class="row"><h3 style="margin:0">${pcat}</h3><button class="btn sm" data-addc="${pcat}">${addOpen===pcat?'Close':'+ Add product'}</button></div>${addOpen===pcat?addForm(pcat):''}${list.map(prodCard).join('')||'<div class="muted" style="margin-top:8px">No products in this category yet.</div>'}</div>`},
+banner(){const sl=S.banner.slots,n=sl.filter(Boolean).length;
+return `<h2>Home banner</h2>
+<div class="card"><div class="row"><b>Status</b><span class="tag ${S.banner.live?'g-Live':'g-Off'}">${S.banner.live?'LIVE on the storefront':'Not live yet'}</span></div>
+<p class="muted" style="margin:8px 0">Add up to 6 options (images, or MP4/MOV videos under 20 MB). Each upload saves automatically, but customers only see the banner after you tap <b>Go live</b>. Wide pictures, about 1600 × 700, look best.</p>
+<button class="btn" id="golive" style="width:100%" ${n?'':'disabled'}>${S.banner.live?'Update live banner':'Go live'} with ${n} option${n===1?'':'s'}</button>${S.banner.live?'<div style="height:8px"></div><button class="btn ghost" id="bandown" style="width:100%">Take banner down</button>':''}</div>
+${sl.map((s,i)=>`<div class="card slot"><div class="row"><b>Option ${i+1}</b>${s?`<button class="btn red sm" data-rmb="${i}">Remove</button>`:''}</div>
+<div class="prev">${s?(s.type==='video'?`<video src="${s.src}" muted controls playsinline></video>`:`<img src="${s.src}" alt="">`):'Nothing added yet'}</div>
+<input class="in" type="file" accept="image/*,.heic,.heif,video/mp4,video/quicktime,.mov" data-bfile="${i}" style="padding-top:8px"></div>`).join('')}
+<button class="btn ghost" id="addslot" ${sl.length>=6?'disabled':''}>Add another option</button>`},
+discount(){const d=S.disc,ex=3500,nw=Math.round(ex*(100-d.pct)/100);
+return `<h2>Discounts</h2><div class="card"><div class="row"><b>Discount sale</b><span class="tag ${d.live?'g-Live':'g-Off'}">${d.live?'Live':'Off'}</span></div>
+<label class="f" for="dp">Percentage off</label><input class="in" id="dp" type="number" min="1" max="90" value="${d.pct}" ${d.live?'disabled':''}><p class="muted">Example: an item at ${money(ex)} shows as <span class="was">${money(ex)}</span><b>${money(nw)}</b> on the storefront while the sale is live.</p>
+<button class="btn ${d.live?'red':''}" id="dtoggle" style="width:100%">${d.live?'Turn off discount (prices go back to normal)':'Go live with '+d.pct+'% off'}</button></div>`},
+bookings(){return `<h2>Booking requests</h2>${bookings.map((b,i)=>`<div class="card"><div class="row"><b>${esc(b.name)}</b><span class="tag g-${b.status}">${b.status}</span></div>
+<div class="muted">${esc(b.event)} · ${esc(b.service)}</div><div class="line"><span>Date and time</span><span>${b.date} ${b.time}</span></div><div class="line"><span>Venue</span><span>${esc(b.venue)}</span></div>${b.notes?`<div class="line"><span>Notes</span><span>${esc(b.notes)}</span></div>`:''}
+<div class="row" style="margin-top:10px"><span><a class="tag g-Delivered" href="tel:${b.phone.replace(/\s/g,'')}">Call</a> <a class="tag g-Delivered" href="https://wa.me/${b.phone.replace(/\D/g,'')}" target="_blank" rel="noopener">WhatsApp</a> <a class="tag g-Delivered" href="mailto:${b.email}">Email</a></span>
+<select class="in" style="width:auto" data-bstat="${i}" aria-label="Status">${STATUS.map(s=>`<option ${s===b.status?'selected':''}>${s}</option>`).join('')}</select></div></div>`).join('')}`},
+finance(){const ver=orders.filter(o=>o.pay==='Verified'),rev=ver.reduce((t,o)=>t+tot(o),0),pend=orders.filter(o=>o.pay==='Pending').length;
+let body;
+if(ftab==='pay'){body=orders.map(o=>`<div class="card"><div class="row"><b>Order #${o.id} · ${money(tot(o))}</b><span class="tag g-${o.pay}">${o.pay}</span></div><div class="muted">${esc(o.cust)} · ${o.date} · ${esc(o.method||'Bank transfer')}</div>
+<div class="row" style="margin-top:8px">${o.receipt?`<a class="tag g-Pending" href="${o.receipt}" target="_blank" rel="noopener">View receipt</a>`:`<span class="tag g-Verified">Paid online</span>`}${o.pay==='Pending'?`<button class="btn sm" data-verify="${o.id}">Mark payment verified</button>`:''}</div></div>`).join('')}
+else{const by={};ver.forEach(o=>o.items.forEach(i=>by[i.n]=(by[i.n]||0)+i.q*i.p));let ent=Object.entries(by).sort((a,b)=>b[1]-a[1]);const top=ent.slice(0,5),rest=ent.slice(5).reduce((t,e)=>t+e[1],0);if(rest)top.push(['Others',rest]);
+const sum=top.reduce((t,e)=>t+e[1],0),COL=['#2b6b21','#4aa52f','#e8762b','#8cc63f','#f3c623','#9aa79a'];let acc=0;
+const arcs=top.map((e,i)=>{const p=e[1]/sum*100,s=`<circle cx="21" cy="21" r="15.915" fill="none" stroke="${COL[i]}" stroke-width="7" stroke-dasharray="${p} ${100-p}" stroke-dashoffset="${25-acc}"/>`;acc+=p;return s}).join('');
+const mx=Math.max(1,...MONTHS.map(m=>m[1])),bars=MONTHS.map((m,i)=>{const h=m[1]/mx*100;return `<rect x="${12+i*47}" y="${120-h}" width="32" height="${h}" rx="4" fill="#4aa52f"/><text x="${28+i*47}" y="136" font-size="11" text-anchor="middle" fill="currentColor">${m[0]}</text><text x="${28+i*47}" y="${114-h}" font-size="10" text-anchor="middle" fill="currentColor">${m[1]}k</text>`}).join('');
+body=`<div class="grid c2"><div class="card"><h3>Sales by product</h3><svg class="ch" viewBox="0 0 42 42" style="max-width:220px;margin:auto"><circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--line)" stroke-width="7"/>${arcs}</svg><div style="margin-top:10px">${top.map((e,i)=>`<div class="leg"><i style="background:${COL[i]}"></i>${esc(e[0])} · ${Math.round(e[1]/sum*100)}%</div>`).join('')}</div></div>
+<div class="card"><h3>Monthly revenue growth (₦ thousands)</h3><svg class="ch" viewBox="0 0 290 145">${bars}</svg><p class="muted">Based on verified payments.</p></div></div>`}
+return `<h2>Finance</h2><div class="grid c3"><div class="card stat"><span class="muted">Verified revenue</span><b>${money(rev)}</b></div><div class="card stat"><span class="muted">Orders</span><b>${orders.length}</b></div><div class="card stat"><span class="muted">Payments to verify</span><b>${pend}</b></div></div>
+<div class="seg"><button data-ftab="over" aria-pressed="${ftab==='over'}">Overview</button><button data-ftab="pay" aria-pressed="${ftab==='pay'}">Payments</button></div>${body}`},
+settings(){const so=S.social;return `<h2>Settings</h2><div class="card"><h3>Delivery fee</h3><label class="f" for="fee">Fee added to delivery orders (₦)</label><input class="in" id="fee" type="number" min="0" value="${S.fee}"><div style="height:10px"></div><button class="btn" id="savefee">Save delivery fee</button></div>
+<div class="card"><h3>Contact us details</h3><p class="muted" style="margin:0">These show on the storefront's Contact us page.</p><label class="f" for="cc">Phone number (calls only)</label><input class="in" id="cc" type="tel" value="${esc(S.contact.call)}"><label class="f" for="cw">WhatsApp number (WhatsApp only)</label><input class="in" id="cw" type="tel" value="${esc(S.contact.wa)}"><label class="f" for="ce">Email address</label><input class="in" id="ce" type="email" value="${esc(S.contact.email)}"><div style="height:10px"></div><button class="btn" id="savecontact">Save contact details</button></div>
+<div class="card"><h3>Payment account details</h3><label class="f" for="ab">Bank</label><input class="in" id="ab" value="${esc(S.acct.bank)}"><label class="f" for="an">Account name</label><input class="in" id="an" value="${esc(S.acct.name)}"><label class="f" for="ac">Account number</label><input class="in" id="ac" value="${esc(S.acct.no)}"><div style="height:10px"></div><button class="btn" id="saveacct">Save account details</button></div>
+<div class="card"><h3>Social media links</h3>${['tiktok','instagram'].map(k=>`<label class="f" for="s_${k}">${k==='tiktok'?'TikTok':'Instagram'} page link</label><div class="row" style="flex-wrap:nowrap"><input class="in" id="s_${k}" value="${esc(so[k].url)}" placeholder="https://"><button class="btn sm ${so[k].live?'red':''}" data-soc="${k}" style="white-space:nowrap">${so[k].live?'Take down':'Go live'}</button></div>`).join('')}<p class="muted">The buttons on the storefront stay inactive until a link is saved and set live.</p></div>`}};
+const API=(window.API_BASE||'').replace(/\/$/,'');try{localStorage.removeItem('bs_admin')}catch(_){}
+let token=sessionStorage.getItem('bs_admin')||'';
+async function api(path,o={}){const h={};if(token)h.Authorization='Bearer '+token;let body=o.body;if(o.json){h['Content-Type']='application/json';body=JSON.stringify(o.json)}
+const r=await fetch(API+path,{method:o.method||'GET',headers:h,body});const d=await r.json().catch(()=>({}));
+if(!r.ok){if(r.status===401&&admin){admin=null;token='';sessionStorage.removeItem('bs_admin');render()}throw new Error(d.error||'Something went wrong')}return d}
+const U=u=>u?(/^https?:/.test(u)?u:API+u):null;
+const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let pushOn=false,lastInc=null,lastBk=null,audioCtx=null;
+const pushOK=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+const b64u=s=>{const r=atob((s+'='.repeat((4-s.length%4)%4)).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from([...r].map(c=>c.charCodeAt(0)))};
+function setBadge(n){try{if(n>0&&navigator.setAppBadge)navigator.setAppBadge(n);else if(navigator.clearAppBadge)navigator.clearAppBadge()}catch(_){}}
+function beep(){try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime;o.connect(g);g.connect(audioCtx.destination);o.frequency.value=880;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.3,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.5);o.start(t);o.stop(t+.5)}catch(_){}}
+function ring(){const b=$('#bell');if(b){b.classList.remove('ring');void b.offsetWidth;b.classList.add('ring')}}
+function alertCard(){if(pushOn)return `<div class="card row"><span class="muted">Order alerts are on for this device.</span><button class="btn ghost sm" id="pushtest">Send test alert</button></div>`;
+return `<div class="card"><h3>Turn on order alerts</h3><p class="muted" style="margin:0 0 10px">Get a buzz and a number on the app icon when an order comes in. On iPhone, first add this page to your Home Screen and open it from there.</p><button class="btn" id="enpush">Turn on alerts</button></div>`}
+async function checkPush(){if(!pushOK()){pushOn=false;return}try{const reg=await navigator.serviceWorker.ready,s=await reg.pushManager.getSubscription();pushOn=!!s&&Notification.permission==='granted';if(pushOn)api('/api/admin/push/subscribe',{method:'POST',json:s.toJSON()}).catch(()=>{})}catch(_){pushOn=false}}
+async function enablePush(){if(!pushOK())return toast('Alerts are not supported here. On iPhone, add this page to your Home Screen and open it from there.');
+try{const perm=await Notification.requestPermission();if(perm!=='granted')return toast('Notifications are blocked. Allow them in your phone settings.');
+const reg=await navigator.serviceWorker.ready,k=(await api('/api/admin/push/key')).publicKey;
+const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(k)});
+await api('/api/admin/push/subscribe',{method:'POST',json:sub.toJSON()});pushOn=true;render();toast('Order alerts are on')}catch(e){toast(e.message||'Could not turn on alerts')}}
+async function offPush(){try{if(!pushOK())return;const s=await(await navigator.serviceWorker.ready).pushManager.getSubscription();if(s){await api('/api/admin/push/unsubscribe',{method:'POST',json:{endpoint:s.endpoint}}).catch(()=>{});await s.unsubscribe()}pushOn=false}catch(_){}}
+async function poll(){if(!admin)return;try{const c=await api('/api/admin/counts'),inc=c.orders,bk=c.bookings;
+if(lastInc!==null&&inc>lastInc){beep();navigator.vibrate&&navigator.vibrate([200,100,200]);await boot();safeRender();ring();toast('New order received')}
+else if(lastBk!==null&&bk>lastBk){beep();await boot();safeRender();toast('New booking request')}
+else if(lastInc!==null&&(inc!==lastInc||bk!==lastBk)){await boot();safeRender()}
+lastInc=inc;lastBk=bk;setBadge(inc)}catch(_){}}
+let lastAct=Date.now(),addOpen='',pcat=CATS[0],vOpen={};
+const safeRender=()=>{const e=document.activeElement;if(e&&(e.tagName==='TEXTAREA'||e.tagName==='INPUT'))return;render()};const IDLE=10*60*1000;
+['click','keydown','touchstart','scroll','input'].forEach(ev=>addEventListener(ev,()=>{lastAct=Date.now()},{passive:true,capture:true}));
+function idleCheck(){if(admin&&Date.now()-lastAct>IDLE){admin=null;token='';sessionStorage.removeItem('bs_admin');products=[];orders=[];bookings=[];render();toast('Logged out after 10 minutes of inactivity')}}
+setInterval(idleCheck,15000);setInterval(poll,20000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){idleCheck();poll()}});
+function parseVariants(text,old){return text.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const i=l.lastIndexOf(','),hp=i>0&&/^\d+$/.test(l.slice(i+1).trim()),name=(hp?l.slice(0,i):l).trim(),o=old.find(v=>v.n===name);return{name,price:hp?+l.slice(i+1).trim():null,available:o?o.a:true}})}
+const prodCard=p=>`<div class="pcard"><div class="pr"><div class="thumb">${p.img?`<img src="${p.img}" alt="">`:'No photo'}</div><div><input class="in" data-pid="${p.id}" data-f="n" value="${esc(p.n)}" aria-label="Name"></div></div>
+<div class="f3" style="margin-top:8px"><select class="in" data-pid="${p.id}" data-f="c" aria-label="Category">${CATS.map(c=>`<option ${c===p.c?'selected':''}>${c}</option>`).join('')}</select><input class="in" type="number" min="0" data-pid="${p.id}" data-f="p" value="${p.p}" aria-label="Price"><button class="tog ${p.a?'on':''}" data-avail="${p.id}" aria-pressed="${!!p.a}">${p.a?'Available':'Out of stock'}</button></div>
+${p.v&&p.v.length?`<div class="muted" style="margin-top:8px">Variants. Tap one to switch it between available and out of stock.</div><div class="vchips">${p.v.map((v,i)=>`<button class="vchip ${v.a?'on':''}" data-vtog="${p.id}|${i}">${esc(v.n)}${v.p!=null?' · '+money(v.p):''}</button>`).join('')}</div>`:''}
+${vOpen[p.id]?`<label class="f" for="vt_${p.id}">Variants (one per line, optional price after a comma)</label><textarea class="in" id="vt_${p.id}" placeholder="Coconut&#10;Banana, 1300&#10;Vanilla">${(p.v||[]).map(v=>esc(v.n)+(v.p!=null?', '+v.p:'')).join('\n')}</textarea><div class="row" style="margin-top:6px;justify-content:flex-start"><button class="btn sm" data-vsave="${p.id}">Save variants</button><button class="btn ghost sm" data-vedit="${p.id}">Cancel</button></div><p class="muted" style="margin:6px 0 0">Leave it empty to remove all variants. A variant without a price uses the product price.</p>`:`<button class="btn ghost sm" data-vedit="${p.id}" style="margin-top:8px">${p.v&&p.v.length?'Edit variants':'Add variants'}</button>`}
+<div class="row" style="margin-top:8px"><span class="muted">Category · Price (₦) · Status</span><span><label class="btn ghost sm" style="display:inline-block;cursor:pointer">Change picture<input type="file" accept="image/*,.heic" data-pimg="${p.id}" hidden></label> <button class="btn red sm" data-delp="${p.id}">Delete</button></span></div></div>`;
+const addForm=c=>`<div class="pcard"><div class="grid c2"><div><label class="f" for="np_n">Name</label><input class="in" id="np_n"></div><div><label class="f" for="np_p">Price (₦)</label><input class="in" id="np_p" type="number" min="0"></div></div>
+<label class="f" for="np_i">Picture</label><input class="in" id="np_i" type="file" accept="image/*,.heic" style="padding-top:8px">
+<label class="f" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="np_hv" style="width:20px;height:20px"> This product has variants (flavours, sizes and so on)</label>
+<div id="np_vbox" style="display:none"><label class="f" for="np_vt">Variants, one per line. Optional price after a comma</label><textarea class="in" id="np_vt" placeholder="Coconut&#10;Banana, 1300&#10;Vanilla"></textarea><p class="muted" style="margin:4px 0 0">A variant without a price uses the price above.</p></div>
+<div style="height:10px"></div><button class="btn" data-addp="${c}">Add to ${c}</button></div>`;
+
+
+async function boot(){const d=await api('/api/admin/bootstrap');admin=d.email;products=d.products.map(p=>({...p,img:U(p.img)}));orders=d.orders.map(o=>({...o,receipt:U(o.receipt)}));bookings=d.bookings;MONTHS=d.months;Object.assign(S,d.settings);S.banner={live:d.settings.banner.live,slots:d.settings.banner.slots.map(b=>({...b,src:U(b.src)}))};while(S.banner.slots.length<3)S.banner.slots.push(null);lastInc=orders.filter(o=>o.st==='Pending').length;lastBk=bookings.filter(b=>b.status==='New').length;setBadge(lastInc)}
+async function act(fn,ok,reload=true){try{await fn();if(reload)await boot();render();if(ok)toast(ok)}catch(e){toast(e.message)}}
+const fdata=o=>{const f=new FormData();Object.entries(o).forEach(([k,v])=>{if(v!==undefined&&v!==null)f.append(k,v)});return f};
+const KEY={n:'name',c:'category',p:'price',s:'stock'};
+const slotsOut=()=>S.banner.slots.filter(Boolean).map(s=>({type:s.type,file:s.file,name:s.name||''}));
+const put=(path,json,ok)=>act(()=>api(path,{method:'PUT',json}),ok);
+document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const d=t.dataset;
+if(t.id==='login'){const em=$('#em').value.trim(),pw=$('#pw').value;if(!/^\S+@\S+\.\S+$/.test(em)||pw.length<6)return toast('Enter your admin email and password');
+act(async()=>{const r=await api('/api/auth/login',{method:'POST',json:{email:em,password:pw}});if(r.role!=='admin')throw new Error('This account is not an admin');token=r.token;sessionStorage.setItem('bs_admin',token);lastAct=Date.now()},'').then(checkPush).then(render)}
+else if(t.id==='logout'){offPush().finally(()=>{admin=null;token='';sessionStorage.removeItem('bs_admin');setBadge(0);render()})}
+else if(t.id==='rf'){t.classList.add('spin');(navigator.serviceWorker?navigator.serviceWorker.getRegistration().then(r=>r&&r.update()):Promise.resolve()).catch(()=>{}).finally(()=>location.reload())}
+else if(t.id==='bell'){tab='orders';otab='in';render();scrollTo(0,0)}
+else if(t.id==='enpush')enablePush()
+else if(t.id==='pushtest'){api('/api/admin/push/test',{method:'POST'}).then(()=>toast('Test alert sent')).catch(e=>toast(e.message))}
+else if(d.tab){tab=d.tab;render();scrollTo(0,0)}
+else if(d.otab){otab=d.otab;render()}else if(d.ftab){ftab=d.ftab;render()}
+else if(d.ost){const[i,s]=d.ost.split('|');act(()=>api('/api/admin/orders/'+i+'/status',{method:'PATCH',json:{status:s}}),'Order updated')}
+else if(d.verify)act(()=>api('/api/admin/orders/'+d.verify+'/payment',{method:'PATCH',json:{status:'Verified'}}),'Payment verified')
+else if(d.delp){if(confirm('Delete this product?'))act(()=>api('/api/admin/products/'+d.delp,{method:'DELETE'}),'Product deleted')}
+else if(t.id==='savep')toast('Changes save automatically');
+else if(d.avail){const p=products.find(x=>x.id==d.avail);act(()=>api('/api/admin/products/'+d.avail,{method:'PATCH',json:{available:!p.a}}),p.a?'Marked out of stock':'Marked available')}
+else if(d.pcat){pcat=d.pcat;addOpen='';render()}
+else if(d.vedit){vOpen[d.vedit]=!vOpen[d.vedit];render()}
+else if(d.addc){addOpen=addOpen===d.addc?'':d.addc;render()}
+else if(d.addp){const n=$('#np_n').value.trim(),p=$('#np_p').value;if(!n||p==='')return toast('Add a name and price');const f=$('#np_i').files[0],hv=$('#np_hv').checked,vs=hv?parseVariants($('#np_vt').value,[]):[];if(hv&&!vs.length)return toast('Add at least one variant');
+act(async()=>{await api('/api/admin/products',{method:'POST',body:fdata({name:n,category:d.addp,price:p,image:f,variants:hv?JSON.stringify(vs):undefined})});addOpen=''},'Product added')}
+else if(d.vtog){const[id,i]=d.vtog.split('|'),p=products.find(x=>x.id==id),vs=p.v.map((v,j)=>({name:v.n,price:v.p,available:j==i?!v.a:v.a}));act(()=>api('/api/admin/products/'+id,{method:'PATCH',json:{variants:vs}}),'Updated')}
+else if(d.vsave){const id=d.vsave,p=products.find(x=>x.id==id),vs=parseVariants($('#vt_'+id).value,p.v||[]);if(!vs.length&&p.v&&p.v.length&&!confirm('Remove all variants from this product?'))return;act(async()=>{await api('/api/admin/products/'+id,{method:'PATCH',json:{variants:vs}});vOpen[id]=false},vs.length?'Variants saved':'Variants removed')}
+else if(d.rmb!==undefined){S.banner.slots[d.rmb]=null;act(()=>api('/api/admin/banner',{method:'PUT',json:{live:S.banner.live,slots:slotsOut()}}),'Removed')}
+else if(t.id==='addslot'){S.banner.slots.push(null);render()}
+else if(t.id==='golive')put('/api/admin/banner',{live:true,slots:slotsOut()},'Banner is live')
+else if(t.id==='bandown')put('/api/admin/banner',{live:false,slots:slotsOut()},'Banner taken down')
+else if(t.id==='dtoggle'){const on=S.disc.live,v=on?S.disc.pct:+$('#dp').value;if(!on&&!(v>=1&&v<=90))return toast('Enter a percentage from 1 to 90');put('/api/admin/discount',{pct:v,live:!on},on?'Discount turned off':v+'% discount is live')}
+else if(t.id==='savefee')put('/api/admin/settings',{fee:+$('#fee').value||0},'Delivery fee saved')
+else if(t.id==='saveacct')put('/api/admin/settings',{account:{bank:$('#ab').value,name:$('#an').value,no:$('#ac').value}},'Account details saved')
+else if(t.id==='savecontact'){const c={call:$('#cc').value.trim(),wa:$('#cw').value.trim(),email:$('#ce').value.trim()};if(c.email&&!/^\S+@\S+\.\S+$/.test(c.email))return toast('Enter a valid email address');put('/api/admin/settings',{contact:c},'Contact details saved')}
+else if(d.soc){const k=d.soc,u=$('#s_'+k).value.trim(),live=!S.social[k].live;if(live&&!/^https?:\/\/\S+/.test(u))return toast('Enter a full link starting with https://');put('/api/admin/settings',{social:{[k]:{url:u,live}}},live?'Link is live':'Link taken down')}});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;
+if(d.pid){const f=new FormData();f.append(KEY[d.f],t.value);act(()=>api('/api/admin/products/'+d.pid,{method:'PATCH',body:f}),'Saved')}
+else if(d.pimg){const f=t.files[0];if(f)act(()=>api('/api/admin/products/'+d.pimg,{method:'PATCH',body:fdata({image:f})}),'Picture updated')}
+else if(d.bfile!==undefined){const f=t.files[0];if(!f)return;const r=checkMedia(f);if(r!=='image'&&r!=='video'){t.value='';return toast(r)}toast('Uploading…');
+act(async()=>{const u=await api('/api/admin/upload',{method:'POST',body:fdata({file:f})});S.banner.slots[d.bfile]={type:u.type,file:u.id,src:U(u.url),name:f.name};await api('/api/admin/banner',{method:'PUT',json:{live:S.banner.live,slots:slotsOut()}})},'Saved to the banner')}
+else if(t.id==='np_hv'){$('#np_vbox').style.display=t.checked?'block':'none'}
+else if(d.bstat!==undefined){act(()=>api('/api/admin/bookings/'+bookings[d.bstat].id,{method:'PATCH',json:{status:t.value}}),'Status updated')}});
+(async()=>{render();if(token){try{await boot();await checkPush();render()}catch(_){token='';admin=null}}})();
+</script><script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))</script>
+</body></html>
